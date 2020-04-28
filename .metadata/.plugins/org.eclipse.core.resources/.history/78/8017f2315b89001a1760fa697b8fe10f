@@ -1,0 +1,115 @@
+package com.kobe;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
+public class ArrayList {
+	
+	/**
+	 * 元素的数量
+	 */
+	private int size = 0;
+	
+	/**
+	 * 所有的元素
+	 */
+	private int[] elements;
+	
+	private static final int DEAFULT_CAPACITY = 10;
+	
+	public ArrayList(int capaticy) {
+		capaticy = (capaticy < DEAFULT_CAPACITY) ? DEAFULT_CAPACITY : capaticy;
+		elements = new int[capaticy];
+	}
+	
+	public ArrayList() {
+		this(DEAFULT_CAPACITY);
+	}
+	
+	/**
+	 * 	清楚所有元素
+	 */
+	public void clear() {
+		
+	}
+	
+	/**
+	 * 元素的数量
+	 * @return
+	 */
+	public int size() {
+		return size;
+	}
+	
+	/**
+	 * 是否为空
+	 * @return
+	 */
+	public boolean isEmpty() {
+		return false;
+		 
+	}
+	
+	/**
+	 * 是否包含某个元素	
+	 * @param element
+	 * @return
+	 */
+	public boolean contains(int element) {
+		return false;
+	}
+	
+	/**
+	 * 添加元素到尾部
+	 * @param element
+	 */
+	public void add(int element) {
+		
+	}
+	
+	/**
+	 * 获取index位置的元素	
+	 * @param index
+	 * @return
+	 */
+	public int get(int index) {
+		return 0;
+	}
+	
+	/**
+	 * 给index位置的元素设置一个值
+	 * @param index
+	 * @param element
+	 * @return
+	 */
+	public int set(int index, int element) {
+		return 0;
+	}
+	
+	/**
+	 * 在index位置插入一个元素
+	 * @param index
+	 * @param element
+	 */
+	public void add(int index, int element) {
+		
+	}
+	
+	/**
+	 * 在index位置删除一个元素
+	 * @param index
+	 * @param element
+	 */
+	public int remove(int index) {
+		return 0;
+	}
+	
+	/**
+	 * 查看index位置的元素
+	 * @param index
+	 * @param element
+	 */
+	public int indexOf(int index) {
+		return -1;
+	}
+
+}
