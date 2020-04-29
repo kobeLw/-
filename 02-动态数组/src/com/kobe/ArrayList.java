@@ -1,8 +1,7 @@
 package com.kobe;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
-public class ArrayList {
+@SuppressWarnings("unchecked")
+public class ArrayList<E> {
 	
 	/**
 	 * 元素的数量
@@ -12,15 +11,16 @@ public class ArrayList {
 	/**
 	 * 所有的元素
 	 */
-	private int[] elements;
+	private E[] elements;
 	
 	private static final int DEAFULT_CAPACITY = 10;
 	
 	private static final int ELEMENT_NOT_FOUND = -1;
 	
+	
 	public ArrayList(int capaticy) {
 		capaticy = (capaticy < DEAFULT_CAPACITY) ? DEAFULT_CAPACITY : capaticy;
-		elements = new int[capaticy];
+		elements = (E[]) new Object[capaticy];
 	}
 	
 	public ArrayList() {
@@ -31,6 +31,9 @@ public class ArrayList {
 	 * 	清楚所有元素
 	 */
 	public void clear() {
+		for (int i = 0; i < size; i++) {
+			elements[i] = null;
+		}
 		size = 0;
 	}
 	
@@ -55,7 +58,7 @@ public class ArrayList {
 	 * @param element
 	 * @return
 	 */
-	public boolean contains(int element) {
+	public boolean contains(E element) {
 		return indexOf(element) != ELEMENT_NOT_FOUND;
 	}
 	
@@ -63,7 +66,7 @@ public class ArrayList {
 	 * 添加元素到尾部
 	 * @param element
 	 */
-	public void add(int element) {
+	public void add(E element) {
 		add(size, element);
 	}
 	
@@ -72,7 +75,7 @@ public class ArrayList {
 	 * @param index
 	 * @return
 	 */
-	public int get(int index) {
+	public E get(int index) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
@@ -85,11 +88,11 @@ public class ArrayList {
 	 * @param element
 	 * @return
 	 */
-	public int set(int index, int element) {
+	public E set(int index, E element) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
-		int old = elements[index];
+		E old = elements[index];
 		elements[index] = element;
 		return old;
 	}
@@ -99,7 +102,7 @@ public class ArrayList {
 	 * @param index
 	 * @param element
 	 */
-	public void add(int index, int element) {
+	public void add(int index, E element) {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
@@ -122,15 +125,17 @@ public class ArrayList {
 	 * @param index
 	 * @param element
 	 */
-	public int remove(int index) {
+	public E remove(int index) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
-		int old = elements[index];
+		E old = elements[index];
 		for (int i = index + 1; i < size; i++) {
 			elements[i - 1] = elements[i];
 		}
 		size--;
+		elements[size] = null;
+		
 		return old;
 	}
 	
@@ -139,12 +144,21 @@ public class ArrayList {
 	 * @param index
 	 * @param element
 	 */
-	public int indexOf(int element) {
-		for (int i = 0; i < size; i++) {
-			if (elements[i] == element) {
-				return i;
+	public int indexOf(E element) {
+		if (element == null) {
+			for (int i = 0; i < size; i++) {
+				if (elements[i] == null) {
+					return i;
+				}
+			}
+		} else {
+			for (int i = 0; i < size; i++) {
+				if (element.equals(elements[i])) {
+					return i;
+				}
 			}
 		}
+		
 		return ELEMENT_NOT_FOUND;
 	}
 
@@ -174,7 +188,7 @@ public class ArrayList {
 		}
 		// 新容量为旧容量的1.5倍
 		int newCapacity = oldCapacity + (oldCapacity >> 1);
-		int[] newElements = new int[newCapacity];
+		E[] newElements = (E[]) new Object[newCapacity];
 		for (int i = 0; i < size; i++) {
 			newElements[i] = elements[i];
 		}
