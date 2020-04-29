@@ -64,8 +64,7 @@ public class ArrayList {
 	 * @param element
 	 */
 	public void add(int element) {
-		elements[size] = element;
-		size++;
+		add(size, element);
 	}
 	
 	/**
@@ -100,17 +99,22 @@ public class ArrayList {
 	 * @param index
 	 * @param element
 	 */
-	public int add(int index, int element) {
+	public void add(int index, int element) {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
-		int old = elements[index];
+		
+		ensureCapacity(size + 1);
+		
+		
 		for (int i = size - 1; i >= index; i--) {
 			elements[i + 1] = elements[i];
 		}
 		elements[index] = element;
 		size++;
-		return old;
+		
+	
+	
 	}
 	
 	/**
@@ -156,5 +160,26 @@ public class ArrayList {
 		}
 		string.append("]");
 		return string.toString();
+	}
+	
+	
+	/**
+	 * 	保证要有capacity
+	 * @param capacity
+	 */
+	private void ensureCapacity(int capacity) {
+		int oldCapacity = elements.length;
+		if (oldCapacity >= capacity) {
+			return;
+		}
+		// 新容量为旧容量的1.5倍
+		int newCapacity = oldCapacity + (oldCapacity >> 1);
+		int[] newElements = new int[newCapacity];
+		for (int i = 0; i < size; i++) {
+			newElements[i] = elements[i];
+		}
+		elements = newElements;
+		
+		System.out.println("旧的容量：" + oldCapacity + "----新的容量：" + newCapacity);
 	}
 }

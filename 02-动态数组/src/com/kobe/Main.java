@@ -9,8 +9,15 @@ public class Main {
 		list.add(77);
 		list.add(88);
 		list.add(99);
+		list.add(66);
+		list.add(55);
 		
-		list.add(3, 66);
+		for (int i = 0; i < 20; i++) {
+			list.add(i);
+		}
+		
 		System.out.println(list.toString());
+
+		
 	}
 }
