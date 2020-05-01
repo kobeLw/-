@@ -8,12 +8,12 @@ public class Main {
 	
 	static void test() {
 			
-		ArrayList<Person> persons =  new ArrayList<>();
-		persons.add(new Person(10, "kobe"));
-		persons.add(new Person(12, "reus"));
-		persons.add(new Person(15, "kaka"));
-		
-		System.out.println(persons);
+//		ArrayList<Person> persons =  new ArrayList<>();
+//		persons.add(new Person(10, "kobe"));
+//		persons.add(new Person(12, "reus"));
+//		persons.add(new Person(15, "kaka"));
+//		
+//		System.out.println(persons);
 		
 		
 		
