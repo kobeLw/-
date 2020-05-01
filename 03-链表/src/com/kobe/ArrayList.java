@@ -38,7 +38,7 @@ public class ArrayList<E> extends AbstrackList<E> {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
-		return elements[index];
+		return elements[index]; // O(1)
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class ArrayList<E> extends AbstrackList<E> {
 	 * @param element
 	 * @return
 	 */
-	public E set(int index, E element) {
+	public E set(int index, E element) { // O(1)
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
@@ -62,6 +62,12 @@ public class ArrayList<E> extends AbstrackList<E> {
 	 * @param element
 	 */
 	public void add(int index, E element) {
+
+		/**
+		 *  最好：O(1)
+		 *  最坏：O(n)
+		 *  平均：O(n)
+		 */
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", size:" + size);
 		}
@@ -74,10 +80,7 @@ public class ArrayList<E> extends AbstrackList<E> {
 		}
 		elements[index] = element;
 		size++;
-		
-	
-	
-	}
+	} // size是数据规模
 	
 	/**
 	 * 在index位置删除一个元素

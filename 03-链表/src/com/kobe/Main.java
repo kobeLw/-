@@ -2,7 +2,7 @@ package com.kobe;
 
 public class Main {
 	public static void main(String[] args) {
-		List<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new LinkedList<Integer>();
 		list.add(20);
 		list.add(0, 10);
 		list.add(30);
