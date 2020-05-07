@@ -53,7 +53,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 				node = node.right;
 			} else if (cmp < 0) {
 				node = node.left;
-			} else {
+			} else { // 想等
+				node.element = element;
 				return;
 			}
 		}
@@ -73,6 +74,56 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 	
 	public boolean contains(E element) {
 		return false;
+	}
+	
+	/**
+	 * 前序遍历
+	 */
+	public void preorderTraversal() {
+		preorderTraversal(root);
+	}
+	
+	private void preorderTraversal(Node<E> node) {
+		if (node == null) {
+			return;
+		}
+		System.out.println(node.element);
+		preorderTraversal(node.left);
+		preorderTraversal(node.right);
+	}
+	
+	/**
+	 * 中序遍历
+	 */
+	public void inorderTraversal() {
+		inorderTraversal(root);
+	}
+	
+	private void inorderTraversal(Node<E> node) {
+		if (node == null) {
+			return;
+		}
+		
+		inorderTraversal(node.left);
+		System.out.println(node.element);
+		inorderTraversal(node.right);
+	}
+	
+	/**
+	 * 后序遍历
+	 */
+	public void postorderTraversal() {
+		postorderTraversal(root);
+	}
+	
+	private void postorderTraversal(Node<E> node) {
+		if (node == null) {
+			return;
+		}
+		
+		postorderTraversal(node.left);
+		postorderTraversal(node.right);
+		System.out.println(node.element);
 	}
 	
 	/**

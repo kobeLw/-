@@ -33,6 +33,8 @@ public class Main {
 		
 		BinaryTrees.println(bstBinarySearchTree);
 		
+		bstBinarySearchTree.postorderTraversal();
+		
 //		BinarySearchTree<Person> bst2 = new BinarySearchTree<>(new PersonComparator());
 //		bst2.add(new Person(12));
 //		bst2.add(new Person(15));
