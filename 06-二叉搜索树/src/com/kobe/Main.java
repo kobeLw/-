@@ -2,6 +2,7 @@ package com.kobe;
 
 import java.util.Comparator;
 
+import com.kobe.BinarySearchTree.Visitor;
 import com.kobe.printer.BinaryTrees;
 
 public class Main {
@@ -32,8 +33,18 @@ public class Main {
 		}
 		
 		BinaryTrees.println(bstBinarySearchTree);
+		System.out.println(bstBinarySearchTree.height());
 		
-		bstBinarySearchTree.postorderTraversal();
+		bstBinarySearchTree.levelOrderTranversal();
+		
+		bstBinarySearchTree.levelOrder(new Visitor<Integer>() {
+			
+ 			public boolean visit(Integer element) {
+				// TODO Auto-generated method stub
+				System.out.println("_" + element + "_");
+				return false;
+			}
+		});
 		
 //		BinarySearchTree<Person> bst2 = new BinarySearchTree<>(new PersonComparator());
 //		bst2.add(new Person(12));

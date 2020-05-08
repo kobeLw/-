@@ -1,6 +1,8 @@
 package com.kobe;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.kobe.printer.BinaryTreeInfo;
 
@@ -126,6 +128,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 		System.out.println(node.element);
 	}
 	
+	public void levelOrderTranversal() {
+		
+	}
+	
 	/**
 	 * @param e1
 	 * @param e2
@@ -144,6 +150,81 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 		}
 	}
 	
+	public void levelOrder(Visitor<E> visitor) {
+		if (root == null || visitor == null) {
+			return;
+		}
+		
+		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(root);
+		
+		while (!queue.isEmpty()) {
+			Node<E> node = queue.poll();
+			if (visitor.visit(node.element)) {
+				return;
+			}
+			
+			if (node.left != null) {
+				queue.offer(node.left);
+			}
+			if (node.right != null) {
+				queue.offer(node.right);
+			}
+		}
+	}
+	
+	public static abstract class Visitor<E> {
+		boolean stop;
+		/**
+		 * @param element
+		 * @return 如果返回true就停止遍历
+		 */
+		abstract boolean visit(E element);
+	}
+	
+	/**s
+	 * 是否是完全二叉树
+	 * @return
+	 */
+	public boolean isComplete() {
+		if (root == null) {
+			return false;
+		}
+		Queue<Node<E>> queue = new LinkedList<>();
+		
+		boolean leaf = false;
+		while (!queue.isEmpty()) {
+			Node<E> node = queue.poll();
+			if (leaf && !node.isLeaf()) {
+				return false;
+			}
+			
+			if (node.hasTwoChildren()) {
+				queue.offer(node.left);
+				queue.offer(node.right);
+			} else if (node.left == null && node.right != null) {
+				return false;
+			} else {
+				leaf = true;
+				if (node.left != null ) {
+					queue.offer(node.left);
+				}
+			}
+		}
+		return true;
+	}
+	
+	public int height() {
+		return height(root);
+	}
+	
+	private int height(Node<E> node) {
+		if (node == null) {
+			return 0;
+		}
+		return 1 + Math.max(height(node.left), height(node.right));
+	}
+	
 	private static class Node<E> {
 		E element;
 		Node<E> left;
@@ -155,7 +236,13 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 			this.parent = parent;
 		}
 		
+		public boolean isLeaf() {
+			return left == null && right == null;
+		}
 		
+		public boolean hasTwoChildren() {
+			return left != null && right != null;
+		}
 	}
 
 	@Override
